@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>homepage-cafe review</title>
+	<link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $("#button1").click(function(){
+                $("#myForm").fadeIn(500);
+                $("#HP").css("filter", "blur(10px)");
+                $("#HP").css("pointerEvents", 'none');
+            });
+        });
+        $(document).ready(function(){
+            $("#button5").click(function(){
+                $("#HP").css("filter", "blur(0)");
+                });
+            });
+    </script>
+
+    <style type="text/css">
+        @import url('https://fonts.googleapis.com/css?family=Josefin+Sans|Ubuntu');
+    </style>
+</head>
+<script type="text/javascript">
+    
+    function validate() {
+            var fname = document.forms["myForms"]["fname"].value;
+            var lname = document.forms["myForms"]["lname"].value;
+            var mail = document.forms["myForms"]["mail"].value;
+            var usn = document.forms["myForms"]["usn"].value;
+            var pwd = document.forms["myForms"]["pwd"].value;
+
+            if (usn.length <= 4) {
+                alert("username should be greater than 4 characters");
+                return false;
+            }
+        }
+
+        function opensignup() {
+            document.getElementById('myForm').style.display='none';
+            document.getElementById('UN').value="";
+            document.getElementById('PW').value="";
+             
+            document.getElementById('HP').style.pointerEvents='none';
+           
+            $("#signupForm").fadeIn(500);
+
+                  
+        }
+
+        function closesignup() {
+            document.getElementById('signupForm').style.display='none';
+            document.getElementById('HP').style.pointerEvents='auto';  
+            document.getElementById('fname').value="";
+            document.getElementById('lname').value="";
+            document.getElementById('email').value="";
+            document.getElementById('usn').value="";
+            document.getElementById('pwd').value="";  
+           
+        }
+
+        function closeform() {
+            document.getElementById('myForm').style.display='none';
+            document.getElementById('UN').value="";
+            document.getElementById('PW').value="";
+            document.getElementById('HP').style.pointerEvents='auto';
+            $("#HP").css("filter", "blur(0)");
+
+        }
+    </script>
+    <script type="text/javascript">
+        if('{{ check }}'=="Exists"){
+            alert("Username not available");
+            $(document).ready(function(){
+                $("#signupForm").fadeIn(500);
+            });
+        }
+        else if('{{ check }}' == "NOT Exists"){
+            alert("User does not exist");
+            $(document).ready(function(){
+                $("#myForm").fadeIn(500);
+            });
+        }
+        else if('{{ check }}' == "NOT Correct"){
+            alert("Password is incorrect");
+            $(document).ready(function(){
+                $("#myForm").fadeIn(500);
+            });
+        }
+    </script>
+<body>
+    <div  style="position: relative;" id="HP">
+
+	   <div class="logo">
+            <img src="{% static 'app1.png' %}" style="float:left;" alt="logo" height="55px" width="70px">
+            <p style="padding-top:1.125rem;"><b>Course</b>bay</p>
+        </div>
+
+        <div id="tag">Rate. Review. Represent.</div>
+        <p class="para">Coursebay is a website hosting reviews of university courses and instructors. Reviews are written by present and past students taking the specific course. Reviews are accesible through a simple search or through categorically choosing college, department and course.</p>
+    
+        <br><br>
+
+        <a href="search"><button id="button">see reviews</button></a>
+        <button id="button1" >write reviews</button> 
+    </div>
+
+    <div class="div1" id="myForm"> 
+        <div class="form">
+            <form action="/login" method="POST" >
+                <label style="color:#EC732B;display: block; text-align: center; font-family: Ubuntu; font-weight: bold; font-size: 2rem; margin-top:8%;">Welcome back!! </label>
+                
+                <div style="font-size: 1.25rem; margin-left:10%;margin-top: 20%;">
+                    <i class="fa fa-user icon w3-xlarge"></i>
+                    <input type="text" placeholder="Username" name="UN" id="UN" required>
+                </div>    
+                
+                <div style="font-size: 1.25rem; margin-left: 10%;margin-top: 5%;">
+                    <i class="fa fa-key icon"></i>
+                    <input type="password" placeholder="Password" name="PW" id="PW" required>
+                </div>
+                
+                <button name="button2" id="button2">Login</button>
+                <button name="button3" id="button3" onclick="closeform()">Close</button>
+                <br><br>
+                <label style="color: black;font-family: Ubuntu;margin-left: 20%; ">Don't have an account?</label>
+                <a id="a1"style="color:grey;" onclick="opensignup()">Signup</a>
+            </form>
+        </div>
+        <div class="pic">   
+            <img id="imgg" src="{% static 'login.jpg' %}"  alt="login image">
+        
+        </div>
+    </div>
+    
+    <div class="div2" id="signupForm">
+        <div class="pic1">
+            <img id="imgg1" src="{% static 'login.jpg' %}"  alt="signup image">
+        </div>
+        <div class="form1">
+            <form enctype="multipart/form-data" name="myForms" method="POST" action="/signup" onsubmit="return validate()">
+                <label style="color:#EC732B;display: block; text-align: center; margin-top: 1%; font-family: Ubuntu; font-weight: bold; font-size: 200%;">Welcome!! </label>
+                
+                <p style="font-family:Ubuntu; font-size: 1rem; text-align: center;">Enter the following details to SignUp</p>
+                
+                <input type="text" placeholder="First Name" name="fname" id="fname" required>
+                
+                
+                <input type="text" name="lname"placeholder="Last Name" id="lname" required>
+                
+                
+                <input type="email" name="mail"placeholder="E-mail" id="mail" required>
+                
+                
+                <input type="text" name="usn" placeholder="Username" id="usn" required>
+                
+                
+                <input type="password" name="pwd" placeholder="Password" id="pwd" required>
+
+                <input id="pic" name="pic" type="file" placeholder="Profile Picture" required/>
+                
+                <button  name="button4"  id="button4" >SignUp</button>
+
+                <button  name="button5"  id="button5" onclick="closesignup()">Close</button>
+                
+            </form>
+        </div>
+        
+    </div>
+</body>
+</html>

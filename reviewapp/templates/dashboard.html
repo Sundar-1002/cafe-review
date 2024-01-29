@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+  <head>
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style type="text/css">
+    @import url('https://fonts.googleapis.com/css?family=Josefin+Sans|Ubuntu');
+    @import url('https://fonts.googleapis.com/css?family=Varela');
+
+    body{
+      background-image: url("{% static 'res.png' %}");
+      background-size: cover;
+    }
+    h1{
+      color: white;
+    }
+    p{
+      font-family: Varela;
+    }
+    span{
+      font-size: 1.5rem;
+      font-weight: bolder;
+    }
+    #div2{
+      justify-content: center;
+      margin-left: 2.6%;
+      border: none;
+      border-bottom-style: solid;
+      border-bottom-color: white;
+      margin-bottom: 2%;
+    }
+    
+  ::-webkit-scrollbar {
+    width: 12px;
+    background-color: #575757;
+  }
+
+  ::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px black; 
+    border-radius: 15px;
+  }
+ 
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background-image: linear-gradient(#525151,#030303);
+    border-radius: 15px;
+  }
+
+  /* Handle on hover */
+    ::-webkit-scrollbar-thumb:hover {
+      background: #525151; 
+  }
+  ::-webkit-scrollbar:hover{
+    width: 12px;
+    background-color: black;
+  }
+    </style>
+  </head>
+  <body>
+    <div id="div1">
+    <h1><center>Dashboard</center></h1>
+    {% for item in items %}
+    <div style="padding: 10px; background-color: rgba(0, 0, 0, 0.9); color: white;width: 90%; font-family: Varela;border-radius: 10px;" id=div2>
+      <p> 
+        <table>
+            <tr>
+                <td>College</td>
+                <td>:</td>
+                <td>{{ item.college }}</td>
+            </tr>
+            <tr>
+                <td>Course</td>
+                <td>:</td>
+                <td>{{ item.course }}</td>
+            </tr>
+            <tr>
+              <td>Title</td>
+              <td>:</td>
+              <td>{{ item.title }}</td>
+            </tr>
+            <tr>
+              <td>Date</td>
+              <td>:</td>
+              <td>{{ item.date }}</td>
+            </tr>
+            <tr>
+              <td>Rating</td>
+              <td>:</td>
+              <td>{{ item.rating }}</td>
+            </tr>
+            <tr>
+              <td>Review</td>
+              <td>:</td>
+              <td>{{ item.review }}</td>
+            </tr>
+          </table>
+      </p>
+    </div>
+    {% endfor %}
+    </div>
+  </body>
+</html>
